@@ -1,0 +1,257 @@
+" 作者:  Eugene Wang
+" 版本:  0.0.1
+" Email: fengbaoxp@gmail.com
+
+"========================================="
+"                 前置条件                "
+"========================================="
+" 关闭vi兼容模式
+set nocompatible
+
+" vundle需要关闭文件类型侦测, vundle初始化后打开。
+filetype off
+
+" 操作系统
+let g:isnix = 0
+if has("unix")
+    let g:isnix = 1
+endif
+
+" 判断gui
+if has("gui_running")
+    let g:isgui = 1
+else
+    let g:isgui = 0
+endif
+
+"安装 vundle
+if (g:isnix)
+    set rtp+=~/dotfiles/vim/vundle/
+else
+    set rtp+=%HOME%/dotfiles/vim/vundle/
+endif
+call vundle#rc()
+
+
+"========================================"
+"             vundle 管理的插件          "
+"========================================"
+" 插件列表需要放在设置插件配置选项前，因为
+" vundle只有看到Plugin命令后，才会将下载并
+" 将插件所在的文件夹加入到runtimepath中。
+Plugin 'gmarik/vundle'
+Plugin 'tomasr/molokai'
+Plugin 'bling/vim-airline'
+Plugin 'fholgado/minibufexpl.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'Yggdroot/indentLine'
+Plugin 'SirVer/ultisnips'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
+
+
+"========================================"
+"               特殊设置                 "
+"========================================"
+" 启用文件类型探测，插件，缩排;
+" 这个需要放在Plugin命令后
+filetype plugin indent on
+
+
+"========================================"
+"               基本配置                 "
+"========================================"
+" 存储个性化配置文件,如：syntax、colors、snippets等。
+" 整个dotfiles是个git repo。需最后加入rtp(因UltiSnips).
+set rtp+=$HOME/dotfiles/vim
+
+" vim 自身命令行模式智能补全
+set wildmenu
+
+" 设置vim编码
+set encoding=utf-8
+set fileencoding=tuf-8
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set langmenu=zh_CN.UTF-8
+language message zh_CN.UTF-8
+
+" 自动缩进，每个tab占四个字符，并且4个空格代替tab。
+set smartindent
+set tabstop=4                           " 设置编辑时制表符占用空格数
+set shiftwidth=4                        " 设置格式化时制表符占用空格数
+set expandtab                           " 将制表符扩展为空格
+set softtabstop=4                       " 将连续的空格视为一个制表符
+
+" 初始窗口高、宽、位置
+set lines=35
+set columns=125
+winpos 100 100
+" 显示行号
+set number
+" 编辑过程中右下角显示行列信息
+set ruler
+" 高亮显示当前行/列
+set cursorline
+set cursorcolumn
+" 高亮显示搜索结果
+set hlsearch
+" 总显示状态栏                          
+set laststatus=2
+" 启用backspace删除字符功能，并且可以跨行。
+set backspace=indent,eol,start
+" 根据当前输入，增量匹配上下文帮助提示内容。
+set completeopt+=longest
+" 禁止折行
+set nowrap
+if (g:isgui)
+    " 隐藏菜单栏
+    set guioptions-=m
+    " 隐藏工具栏
+    set guioptions-=T
+    " 隐藏左侧滚动条
+    set guioptions-=L
+    " 隐藏右侧滚动条
+    set guioptions-=r
+    " 隐藏底部滚动条
+    set guioptions-=b                   
+endif
+
+" 自定义快捷键
+let mapleader=";"                       " 定义快捷键前缀，即<leader>
+vnoremap    <leader>y "+y               " 定义系统剪贴板复制快捷键
+nmap        <leader>p                   " 定义系统剪贴板粘贴快捷键
+
+" 代码折叠设置
+" 1. syntax: 基于语法折叠;
+" 2. indent: 基于缩进进行折叠;
+" 3. diff:   为更改文本构成折叠;
+" 4. manual: 手工建立折叠;
+" za: 打开或者关闭折叠
+" zM: 关闭所有折叠;
+" zR: 打开所有折叠;
+set foldmethod=syntax
+set nofoldenable                        " vim启动时关闭所有折叠代码
+
+" vim全屏模式
+if (g:isnix)
+    " 将外部命令wmctrl控制窗口最大化的命令行参数封装成一个vim函数
+    " 前置条件: 安装wmctrl
+    " $ sudo apt-get install wmctrl
+    fun! ToggleFullscreen()
+        call system("wmctrl -ir" . v:windowid . " -b toggle,fullscreen")
+    endf
+    " 全局开/关快捷键
+    map <silent> <F11> :call ToggleFullscreen()<CR>
+    " vim启动自动全屏
+    " autocmd VimEnter * call ToggleFullscreen()    
+endif
+
+" 终端支持colors或者是gui模式，开启语法高亮
+if &t_Co > 2 || (g:isgui)
+    syntax on
+endif
+
+" 设置GUI字体
+if has("gui_gtk2")
+    set guifont=YaHei\ Consolas\ Hybrid\ 14 
+elseif has("gui_win32")
+    set guifont=YaHei\ Consolas\ Hybrid:h14
+endif
+
+
+"========================================"
+"               插件配置                 "
+"========================================"
+" molokai主题插件配置
+colorscheme molokai
+
+" airline插件配置
+set laststatus=2                        " 状态栏一直显示
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'tomorrow'
+
+" MiniBufExpl插件配置
+" bl 速记:  buffer list
+map <leader>bl  :MBEToggle<CR>
+map <leader>bd  :MBEbd<CR>
+map <leader>bw  :MBEbw<CR>
+map <leader>bun :MBEbun<CR>
+map <leader>bb  :MBEbb<CR>
+map <leader>bf  :MBEbf<CR>
+map <C-Tab>     :MBEbn<CR>
+map <C-S-Tab>   :MBEbp<CR>
+
+
+" NERDTree插件配置
+" fl 速记:  file list
+nmap <leader>fl :NERDTreeToggle<CR>
+" NERDTree子窗口宽度
+let NERDTreeWinSize=35
+" NERDTree子窗口位置
+let NERDTreeWinPos="left"
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" 不显示冗余帮助信息
+let NERDTreeMinimalUI=1
+" 删除文件自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
+" vim启动自动打开NERDTree子窗口
+au VimEnter * NERDTreeToggle
+" 使用帮助
+" 回车或o:  打开选中文件
+" r:        刷新工程目录文件列表
+" I(大写):  显示/隐藏 隐藏文件
+" m:        显示操作菜单
+
+" indentLine插件配置
+" il 速记:  ident line
+nmap <leader>il :IndentLinesToggle<CR>
+
+" ultisnips插件设置
+" ultisnips的tab键与YCM冲突，重新设定
+let g:UltiSnipsExpandTrigger="<leader><Tab>"
+let g:UltiSnipsJumpForwardTrigger="<leader><Tab>"
+let g:UltiSnipsJumpBackwardTrigger="<leader><S-Tab>"
+
+" YouCompleteMe插件配置
+" YouCompleteMe相当于
+"   clang_complete
+"   AutoComplPop
+"   Supertab
+"   neocomplcache
+" 四个插件组合
+" Ubuntu快速安装(其他参考：https://github.com/Valloric/YouCompleteMe)。
+" 1.编译YCM带C家族语言语义支持
+"   cd ~/.vim/bundle/YouCompleteMe
+"   ./install.sh --clang-completer
+" 2.编译YCM不带C家族语言语义支持
+"   cd ~/.vim/bundle/YouCompleteMe
+"   ./install.sh
+" 允许vim加载 .yum_extra_conf.py 文件，不再提示
+let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
+" 注释中支持补全
+let g:ycm_complete_in_comments=1
+" 补全内容不以分割窗口形式出现，只显示补全列表
+set completeopt-=preview
+" 语法关键字补全
+let g:ycm_seed_identifiers_with_syntax=1
+
+" vim-go插件配置
+" 全特征的用于vim的go开发环境支持，vim-go自动下载所有必要的二进制程序。
+" vim-go集成以下插件
+"   gocode
+"   goimports
+"   godef
+"   golint
+"   oracle
+" vim-go与以下两个插件深度集成，需先安装以下两个插件
+"   YouCompleteMe
+"   ultisnips
+" GoImport设置
+au FileType go nnoremap <buffer> <leader>gi :exe 'GoImport ' . expand('<cword>')<CR>
+" GoCode设置
+let g:gocode_gofmt_tabs=' -tabs=true'
+let g:gocode_fofmt_tabwith=' -tabwidth=4'
+" GoDef设置
+let g:godef_split=0
+au FileType go nnoremap <buffer> <leader>gd :exe 'GoDef'<CR>

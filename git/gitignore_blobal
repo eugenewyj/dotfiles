@@ -1,0 +1,5 @@
+# vim
+.*.sw[a_z]
+*.un~
+Session.vim
+
