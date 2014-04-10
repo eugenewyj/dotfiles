@@ -22,3 +22,5 @@ git config --global push.default upstream
 # Linux下转换CRLF结束符为LF结束符，并在repo中保存LF;
 # Windows下checkout时将LF转换为CRLF，并在commit时转换回来。
 git config --global core.autocrlf input
+
+git config --global core.excludesfile ~/.gitignore_global

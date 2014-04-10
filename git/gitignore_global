@@ -3,3 +3,7 @@
 *.un~
 Session.vim
 
+# Unix misc
+*~
+.*
+!.gitignore
