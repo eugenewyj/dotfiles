@@ -40,9 +40,11 @@ call vundle#rc()
 " vundle只有看到Plugin命令后，才会将下载并
 " 将插件所在的文件夹加入到runtimepath中。
 Plugin 'gmarik/vundle'
-Plugin 'tomasr/molokai'
+"Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'fholgado/minibufexpl.vim'
+Plugin 'moll/vim-bbye'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
 Plugin 'SirVer/ultisnips'
@@ -162,8 +164,9 @@ endif
 "========================================"
 "               插件配置                 "
 "========================================"
-" molokai主题插件配置
-colorscheme molokai
+" solaried主题插件配置
+set background=dark
+colorscheme solarized
 
 " airline插件配置
 set laststatus=2                        " 状态栏一直显示
@@ -173,14 +176,12 @@ let g:airline_theme = 'tomorrow'
 " MiniBufExpl插件配置
 " bl 速记:  buffer list
 map <leader>bl  :MBEToggle<CR>
-map <leader>bd  :MBEbd<CR>
-map <leader>bw  :MBEbw<CR>
-map <leader>bun :MBEbun<CR>
-map <leader>bb  :MBEbb<CR>
-map <leader>bf  :MBEbf<CR>
 map <C-Tab>     :MBEbn<CR>
 map <C-S-Tab>   :MBEbp<CR>
 
+" bbye插件及配置
+map <leader>bd :Bdelete<CR>
+map <leader>bq :bufdo :Bdelete<CR>
 
 " NERDTree插件配置
 " fl 速记:  file list
