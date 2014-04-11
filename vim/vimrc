@@ -248,11 +248,11 @@ let g:ycm_seed_identifiers_with_syntax=1
 " vim-go与以下两个插件深度集成，需先安装以下两个插件
 "   YouCompleteMe
 "   ultisnips
-" GoImport设置
-au FileType go nnoremap <buffer> <leader>gi :exe 'GoImport ' . expand('<cword>')<CR>
-" GoCode设置
-let g:gocode_gofmt_tabs=' -tabs=true'
-let g:gocode_fofmt_tabwith=' -tabwidth=4'
-" GoDef设置
-let g:godef_split=0
-au FileType go nnoremap <buffer> <leader>gd :exe 'GoDef'<CR>
+au FileType go nmap <leader>gf :exe 'GoFmt'<CR>
+au FileType go nmap <leader>gh <Plug>(go-doc)
+au FileType go nmap <leader>gr <Plug>(go-run)
+au FileType go nmap <leader>gb <Plug>(go-build)
+au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>gd <Plug>(go-def)
+let g:go_fmt_command = 'gofmt'
+let g:go_fmt_options = '-tabs=false -tabwidth=4'
