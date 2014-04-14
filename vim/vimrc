@@ -50,6 +50,8 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'SirVer/ultisnips'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'plasticboy/vim-markdown'
 
 
 "========================================"
