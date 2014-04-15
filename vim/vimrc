@@ -167,8 +167,9 @@ endif
 "               插件配置                 "
 "========================================"
 " solaried主题插件配置
-set background=dark
+set background=light
 colorscheme solarized
+call togglebg#map("<F5>")
 
 " airline插件配置
 set laststatus=2                        " 状态栏一直显示
@@ -258,3 +259,6 @@ au FileType go nmap <leader>gt <Plug>(go-test)
 au FileType go nmap <leader>gd <Plug>(go-def)
 let g:go_fmt_command = 'gofmt'
 let g:go_fmt_options = '-tabs=false -tabwidth=4'
+
+" vim-markdown插件配置
+let g:vim_markdown_folding_disabled=1
