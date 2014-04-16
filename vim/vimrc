@@ -52,6 +52,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'fatih/vim-go'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'plasticboy/vim-markdown'
+Plugin 'jiangmiao/auto-pairs'
 
 
 "========================================"
@@ -123,7 +124,7 @@ endif
 " 自定义快捷键
 let mapleader=";"                       " 定义快捷键前缀，即<leader>
 vnoremap    <leader>y "+y               " 定义系统剪贴板复制快捷键
-nmap        <leader>p                   " 定义系统剪贴板粘贴快捷键
+nmap        <leader>p "+p               " 定义系统剪贴板粘贴快捷键
 
 " 代码折叠设置
 " 1. syntax: 基于语法折叠;
