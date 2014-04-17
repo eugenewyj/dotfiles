@@ -93,8 +93,8 @@ language message zh_CN.UTF-8
 set smartindent
 set tabstop=4                           " 设置编辑时制表符占用空格数
 set shiftwidth=4                        " 设置格式化时制表符占用空格数
-set expandtab                           " 将制表符扩展为空格
-set softtabstop=4                       " 将连续的空格视为一个制表符
+"set expandtab                           " 将制表符扩展为空格
+"set softtabstop=4                       " 将连续的空格视为一个制表符
 set shiftround                          " 缩进取整
 
 " 初始窗口高、宽、位置
@@ -178,7 +178,7 @@ endif
 "               插件配置                 "
 "========================================"
 " Go插件设置
-let g:gofmt_command="gofmt" 
+let g:gofmt_command="goimports" 
 au Filetype go au BufWritePre <buffer> Fmt
 
 " solaried主题插件配置
