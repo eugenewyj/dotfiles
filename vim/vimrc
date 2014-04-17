@@ -10,6 +10,8 @@ set nocompatible
 
 " vundle需要关闭文件类型侦测, vundle初始化后打开。
 filetype off
+" go插件需要，go插件安装后打开
+filetype plugin indent off
 
 " 操作系统
 let g:isnix = 0
@@ -32,6 +34,12 @@ else
 endif
 call vundle#rc()
 
+" 安装go插件
+if (g:isnix)
+    set rtp+=$GOROOT/misc/vim
+else
+    set rtp+=%GOROOT%/misc/vim
+endif
 
 "========================================"
 "             vundle 管理的插件          "
@@ -40,20 +48,21 @@ call vundle#rc()
 " vundle只有看到Plugin命令后，才会将下载并
 " 将插件所在的文件夹加入到runtimepath中。
 Plugin 'gmarik/vundle'
-"Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'bling/vim-airline'
 Plugin 'fholgado/minibufexpl.vim'
 Plugin 'moll/vim-bbye'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
-Plugin 'SirVer/ultisnips'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'fatih/vim-go'
+Plugin 'ervandew/supertab'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'          
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'                     " 定义了多种语言snippets。
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jiangmiao/auto-pairs'
-
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 "========================================"
 "               特殊设置                 "
@@ -86,6 +95,7 @@ set tabstop=4                           " 设置编辑时制表符占用空格�
 set shiftwidth=4                        " 设置格式化时制表符占用空格数
 set expandtab                           " 将制表符扩展为空格
 set softtabstop=4                       " 将连续的空格视为一个制表符
+set shiftround                          " 缩进取整
 
 " 初始窗口高、宽、位置
 set lines=35
@@ -117,7 +127,7 @@ if (g:isgui)
     set guioptions-=L
     " 隐藏右侧滚动条
     set guioptions-=r
-    " 隐藏底部滚动条
+    " 隐藏底部滚动条gg
     set guioptions-=b                   
 endif
 
@@ -167,6 +177,10 @@ endif
 "========================================"
 "               插件配置                 "
 "========================================"
+" Go插件设置
+let g:gofmt_command="gofmt" 
+au Filetype go au BufWritePre <buffer> Fmt
+
 " solaried主题插件配置
 set background=light
 colorscheme solarized
@@ -212,54 +226,10 @@ au VimEnter * NERDTreeToggle
 " il 速记:  ident line
 nmap <leader>il :IndentLinesToggle<CR>
 
-" ultisnips插件设置
-" ultisnips的tab键与YCM冲突，重新设定
-let g:UltiSnipsExpandTrigger="<leader><Tab>"
-let g:UltiSnipsJumpForwardTrigger="<leader><Tab>"
-let g:UltiSnipsJumpBackwardTrigger="<leader><S-Tab>"
-
-" YouCompleteMe插件配置
-" YouCompleteMe相当于
-"   clang_complete
-"   AutoComplPop
-"   Supertab
-"   neocomplcache
-" 四个插件组合
-" Ubuntu快速安装(其他参考：https://github.com/Valloric/YouCompleteMe)。
-" 1.编译YCM带C家族语言语义支持
-"   cd ~/.vim/bundle/YouCompleteMe
-"   ./install.sh --clang-completer
-" 2.编译YCM不带C家族语言语义支持
-"   cd ~/.vim/bundle/YouCompleteMe
-"   ./install.sh
-" 允许vim加载 .yum_extra_conf.py 文件，不再提示
-let g:ycm_global_ycm_extra_conf="~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py"
-" 注释中支持补全
-let g:ycm_complete_in_comments=1
+" supertab插件配置
+let g:SuperTabDefaultCompletionType="context"
 " 补全内容不以分割窗口形式出现，只显示补全列表
 set completeopt-=preview
-" 语法关键字补全
-let g:ycm_seed_identifiers_with_syntax=1
-
-" vim-go插件配置
-" 全特征的用于vim的go开发环境支持，vim-go自动下载所有必要的二进制程序。
-" vim-go集成以下插件
-"   gocode
-"   goimports
-"   godef
-"   golint
-"   oracle
-" vim-go与以下两个插件深度集成，需先安装以下两个插件
-"   YouCompleteMe
-"   ultisnips
-au FileType go nmap <leader>gf :exe 'GoFmt'<CR>
-au FileType go nmap <leader>gh <Plug>(go-doc)
-au FileType go nmap <leader>gr <Plug>(go-run)
-au FileType go nmap <leader>gb <Plug>(go-build)
-au FileType go nmap <leader>gt <Plug>(go-test)
-au FileType go nmap <leader>gd <Plug>(go-def)
-let g:go_fmt_command = 'gofmt'
-let g:go_fmt_options = '-tabs=false -tabwidth=4'
 
 " vim-markdown插件配置
 let g:vim_markdown_folding_disabled=1
