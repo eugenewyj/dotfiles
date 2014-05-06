@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# 安装git
+#sudo add-apt-repository ppa:mitya57    
+#sudo apt-get update    
+#sudo apt-get install retext
+
 git config --global user.name "Eugene Wang"
 
 current_email=$(git config --global --get user.email)
