@@ -1,21 +1,16 @@
 #!/bin/bash
-current_dir="$( cd "$( dirname "$0" )" && pwd )"
 
-# 配置git
-source $current_dir/git/config.sh
-if [[ ! -a ~/.gitignore_global ]]
+passwd="$1"
+
+#未输入sudo密码，提示后退出。
+if [[ "$passwd" == "" ]]
 then
-    ln -s $current_dir/git/gitignore_global ~/.gitignore_global
+    echo "请输入sudo密码"
+    exit 1
 fi
 
-# 配置vim
-if [[ ! -a ~/.vimrc ]]
-then
-    ln -s $current_dir/vim/vimrc ~/.vimrc
-fi
+# 安装ReText
+echo "$passwd"|sudo -S add-apt-repository ppa:mitya57    
+echo "$passwd"|sudo -S apt-get update    
+echo "$passwd"|sudo -S apt-get install retext
 
-# 配置ReText
-if [[ ! -a ~/.config/ReText\ project ]]
-then
-    ln -s $current_dir/ReText\ project ~/.config/ReText\ project
-fi
