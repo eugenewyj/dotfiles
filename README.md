@@ -17,3 +17,9 @@ $ git submoudle update --init
 $ cd ~/dotfiles
 $ ./setup.sh
 ```
+
+3. 执行配置脚本
+```bash
+$ cd ~/dotfiles
+$ ./config.sh
+```
