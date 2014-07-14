@@ -1,4 +1,7 @@
 #!/bin/bash
+set -o nounset
+set -o errexit
+
 current_dir="$( cd "$( dirname "$0" )" && pwd )"
 
 # 配置git
