@@ -3,22 +3,21 @@ set -o nounset
 set -o errexit
 
 current_dir="$( cd "$( dirname "$0" )" && pwd )"
+echo $current_dir
 
 # 配置git
 source $current_dir/git/config.sh
-if [[ ! -a ~/.gitignore_global ]]
+echo "执行完[git/config.sh]"
+
+if [[ ! -f ~/.gitignore_global ]]
 then
     ln -s $current_dir/git/gitignore_global ~/.gitignore_global
+    echo "创建gitignore_global链接"
 fi
 
 # 配置vim
-if [[ ! -a ~/.vimrc ]]
+if [[ ! -f ~/.vimrc ]]
 then
     ln -s $current_dir/vim/vimrc ~/.vimrc
-fi
-
-# 配置ReText
-if [[ ! -a ~/.config/ReText\ project ]]
-then
-    ln -s $current_dir/ReText\ project ~/.config/ReText\ project
+    echo "创建.vimrc链接"
 fi
