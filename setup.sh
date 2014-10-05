@@ -2,11 +2,14 @@
 set -o nounset
 set -o errexit
 
-passwd="$1"
-
-#未输入sudo密码，提示后退出。
-if [[ "$passwd" == "" ]]
+if [[ $# != 1 ]]
 then
     echo "请输入sudo密码"
     exit 1
 fi
+
+passwd="$1"
+
+# 安装wmctrl
+echo $passwd | sudo -S apt-get install wmctrl
+
