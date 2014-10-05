@@ -50,11 +50,11 @@ Plugin 'Yggdroot/indentLine'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'          
-Plugin 'garbas/vim-snipmate'
-Plugin 'honza/vim-snippets'                     " 定义了多种语言snippets。
+Plugin 'SirVer/ultisnips'
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'fatih/vim-go'
 
 "========================================"
 "               特殊设置                 "
@@ -169,11 +169,6 @@ endif
 "========================================"
 "               插件配置                 "
 "========================================"
-" Go官方插件设置
-let g:gofmt_command="goimports" 
-au Filetype go au BufWritePre <buffer> Fmt
-au Filetype go compiler go
-
 " solaried主题插件配置
 set background=light
 colorscheme solarized
