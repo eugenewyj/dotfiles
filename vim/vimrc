@@ -34,14 +34,6 @@ else
 endif
 call vundle#rc()
 
-" 安装go官方插件
-" 功能包括： 语法高亮，文件类型探测，代码缩进，编译器插件，godoc插件。
-if (g:isnix)
-    set rtp+=$GOROOT/misc/vim
-else
-    set rtp+=%GOROOT%/misc/vim
-endif
-
 "========================================"
 "             vundle 管理的插件          "
 "========================================"
@@ -55,7 +47,7 @@ Plugin 'fholgado/minibufexpl.vim'
 Plugin 'moll/vim-bbye'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Yggdroot/indentLine'
-Plugin 'ervandew/supertab'
+Plugin 'Valloric/YouCompleteMe'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'          
 Plugin 'garbas/vim-snipmate'
@@ -63,8 +55,6 @@ Plugin 'honza/vim-snippets'                     " 定义了多种语言snippets�
 Plugin 'terryma/vim-multiple-cursors'
 Plugin 'plasticboy/vim-markdown'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'Blackrush/vim-gocode'
-Plugin 'dgryski/vim-godef'
 
 "========================================"
 "               特殊设置                 "
@@ -236,6 +226,3 @@ set completeopt-=preview
 
 " vim-markdown插件配置
 let g:vim_markdown_folding_disabled=1
-
-" vim-godef插件配置
-let g:godef_split = 0
