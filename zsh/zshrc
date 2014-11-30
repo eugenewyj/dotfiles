@@ -121,3 +121,5 @@ export PATH=$GOROOT/bin:$GOPATH/bin:$PATH
 # 导出RazorSQL
 export PATH=/opt/razorsql:$PATH
 
+# 设置wrap
+source /home/eugene/dotfiles/warp/warp
