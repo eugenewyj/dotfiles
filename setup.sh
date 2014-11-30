@@ -10,6 +10,12 @@ fi
 
 passwd="$1"
 
+# 安装git
+echo $passwd | sudo -S apt-get install git
+echo $passwd | sudo -S apt-get install git-core
+
+# 安装zsh
+echo $passwd | sudo -S apt-get install zsh
+
 # 安装wmctrl
 echo $passwd | sudo -S apt-get install wmctrl
-
