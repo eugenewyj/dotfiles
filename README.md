@@ -12,13 +12,7 @@ $ cd ~/dotfiles
 $ git submoudle update --init
 ```
 
-2. 执行安装脚本
-```bash
-$ cd ~/dotfiles
-$ ./setup.sh
-```
-
-3. 执行配置脚本
+2. 执行配置脚本
 ```bash
 $ cd ~/dotfiles
 $ ./config.sh

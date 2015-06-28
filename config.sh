@@ -21,3 +21,10 @@ then
     ln -s $current_dir/vim/vimrc ~/.vimrc
     echo "创建.vimrc链接"
 fi
+
+# 配置tmux
+if [[ ! -f ~/.tmux.conf ]]
+then
+    ln -s $current_dir/tmux/tmux.conf ~/.tmux.conf
+    echo "创建.tmux.conf链接"
+fi

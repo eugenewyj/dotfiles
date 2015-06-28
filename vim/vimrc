@@ -13,12 +13,6 @@ filetype off
 " go插件需要，go插件安装后打开
 filetype plugin indent off
 
-" 操作系统
-let g:isnix = 0
-if has("unix")
-    let g:isnix = 1
-endif
-
 " 判断gui
 if has("gui_running")
     let g:isgui = 1
@@ -27,11 +21,7 @@ else
 endif
 
 "安装 vundle
-if (g:isnix)
-    set rtp+=~/dotfiles/vim/vundle/
-else
-    set rtp+=%HOME%/dotfiles/vim/vundle/
-endif
+set rtp+=~/dotfiles/vim/vundle/
 call vundle#rc()
 
 "========================================"
@@ -43,18 +33,18 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'bling/vim-airline'
 Plugin 'fholgado/minibufexpl.vim'
-Plugin 'moll/vim-bbye'
+"Plugin 'moll/vim-bbye'
 Plugin 'scrooloose/nerdtree'
-Plugin 'Yggdroot/indentLine'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'          
-Plugin 'SirVer/ultisnips'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'fatih/vim-go'
-Plugin 'majutsushi/tagbar'
+"Plugin 'Yggdroot/indentLine'
+"Plugin 'Valloric/YouCompleteMe'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'          
+"Plugin 'SirVer/ultisnips'
+"Plugin 'terryma/vim-multiple-cursors'
+"Plugin 'plasticboy/vim-markdown'
+"Plugin 'jiangmiao/auto-pairs'
+"Plugin 'fatih/vim-go'
+"Plugin 'majutsushi/tagbar'
 
 "========================================"
 "               特殊设置                 "
@@ -90,8 +80,8 @@ set softtabstop=4                       " 将连续的空格视为一个制表�
 set shiftround                          " 缩进取整
 
 " 初始窗口高、宽、位置
-set lines=35
-set columns=125
+set lines=70
+set columns=210
 winpos 100 100
 " 显示行号
 set number
@@ -139,20 +129,6 @@ nmap        <leader>p "+p               " 定义系统剪贴板粘贴快捷键
 set foldmethod=syntax
 set nofoldenable                        " vim启动时关闭所有折叠代码
 
-" vim全屏模式
-if (g:isnix)
-    " 将外部命令wmctrl控制窗口最大化的命令行参数封装成一个vim函数
-    " 前置条件: 安装wmctrl
-    " $ sudo apt-get install wmctrl
-    fun! ToggleFullscreen()
-        call system("wmctrl -ir" . v:windowid . " -b toggle,fullscreen")
-    endf
-    " 全局开/关快捷键
-    map <silent> <F11> :call ToggleFullscreen()<CR>
-    " vim启动自动全屏
-    " autocmd VimEnter * call ToggleFullscreen()    
-endif
-
 " 终端支持colors或者是gui模式，开启语法高亮
 if &t_Co > 2 || (g:isgui)
     syntax on
@@ -184,8 +160,8 @@ map <C-Tab>     :MBEbn<CR>
 map <C-S-Tab>   :MBEbp<CR>
 
 " bbye插件及配置
-map <leader>bd :Bdelete<CR>
-map <leader>bq :bufdo :Bdelete<CR>
+" map <leader>bd :Bdelete<CR>
+" map <leader>bq :bufdo :Bdelete<CR>
 
 " NERDTree插件配置
 " fl 速记:  file list
@@ -201,7 +177,7 @@ let NERDTreeMinimalUI=1
 " 删除文件自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 " vim启动自动打开NERDTree子窗口
-au VimEnter * NERDTreeToggle
+" au VimEnter * NERDTreeToggle
 " 使用帮助
 " 回车或o:  打开选中文件
 " r:        刷新工程目录文件列表
@@ -213,9 +189,9 @@ au VimEnter * NERDTreeToggle
 nmap <leader>il :IndentLinesToggle<CR>
 
 " supertab插件配置
-let g:SuperTabDefaultCompletionType="context"
+"let g:SuperTabDefaultCompletionType="context"
 " 补全内容不以分割窗口形式出现，只显示补全列表
-set completeopt-=preview
+"set completeopt-=preview
 
 " vim-markdown插件配置
-let g:vim_markdown_folding_disabled=1
+" let g:vim_markdown_folding_disabled=1
