@@ -1,9 +1,0 @@
-# vim
-.*.sw[a_z]
-*.un~
-Session.vim
-
-# Unix misc
-*~
-.*
-!.gitignore
